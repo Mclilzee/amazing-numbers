@@ -24,7 +24,7 @@ public class AmazingNumber {
     private boolean isDuck() {
         long copyNumber = this.number;
         while (copyNumber > 0) {
-            int digit = (int) copyNumber % 10;
+            byte digit = (byte) (copyNumber % 10);
             copyNumber /= 10;
 
             if (digit == 0) {

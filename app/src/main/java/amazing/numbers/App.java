@@ -10,17 +10,15 @@ public class App {
 
     public static void inputRequest() {
         Scanner scanner = new Scanner(System.in);
-        System.out.print("""
-                Welcome to Amazing Numbers!
-
-                Supported requests:
-                - enter a natural number to know its properties;
-                - enter 0 to exit.           
-                """);
+        System.out.println("Welcome to Amazing Numbers!\n");
+        System.out.println("Supported requests:");
+        System.out.println("- enter a natural number to know its properties;");
+        System.out.println("- enter 0 to exit.");
+        System.out.println();
 
         while (true) {
             System.out.println();
-            System.out.print("Enter a natural number: ");
+            System.out.print("Enter a request: ");
             String input = scanner.nextLine();
             System.out.println();
 
