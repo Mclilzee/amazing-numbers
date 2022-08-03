@@ -6,6 +6,7 @@ public class App {
 
     public static void main(String[] args) {
         Scanner scanner = new Scanner(System.in);
+        System.out.println("Enter a natural number:");
         String input = scanner.nextLine();
 
         if (input.matches("\\d*")) {
