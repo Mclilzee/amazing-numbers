@@ -9,7 +9,7 @@ public class App {
         System.out.println("Enter a natural number:");
         String input = scanner.nextLine();
 
-        if (input.matches("\\d*")) {
+        if (input.matches("\\d*") && !input.equals("0")) {
             showResult(Integer.parseInt(input));
         } else {
             System.out.println("This number is not natural!");
