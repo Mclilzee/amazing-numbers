@@ -7,23 +7,19 @@ public class AmazingNumber {
         this.number = number;
     }
 
-    public int getNumber() {
-        return number;
-    }
-
-    public boolean isEven() {
+    private boolean isEven() {
         return this.number % 2 == 0;
     }
 
-    public boolean isOdd() {
+    private boolean isOdd() {
         return this.number % 2 != 0;
     }
 
-    public boolean isBuzz() {
+    private boolean isBuzz() {
         return this.number % 7 == 0 || this.number % 10 == 7;
     }
 
-    public boolean isDuck() {
+    private boolean isDuck() {
         int copyNumber = this.number;
         while (copyNumber > 0) {
             int digit = copyNumber % 10;
@@ -35,5 +31,13 @@ public class AmazingNumber {
         }
 
         return false;
+    }
+
+    public void printProperties() {
+        System.out.println("Properties of " + this.number);
+        System.out.println("\teven: " + isEven());
+        System.out.println("\todd: " + isOdd());
+        System.out.println("\tbuzz: " + isBuzz());
+        System.out.println("\tduck: " + isDuck());
     }
 }
