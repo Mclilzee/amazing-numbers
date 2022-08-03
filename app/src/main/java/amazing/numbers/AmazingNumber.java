@@ -1,9 +1,9 @@
 package amazing.numbers;
 
 public class AmazingNumber {
-    private final int number;
+    private final long number;
 
-    public AmazingNumber(int number) {
+    public AmazingNumber(long number) {
         this.number = number;
     }
 
@@ -20,9 +20,9 @@ public class AmazingNumber {
     }
 
     private boolean isDuck() {
-        int copyNumber = this.number;
+        long copyNumber = this.number;
         while (copyNumber > 0) {
-            int digit = copyNumber % 10;
+            int digit = (int) copyNumber % 10;
             copyNumber /= 10;
 
             if (digit == 0) {
