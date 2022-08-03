@@ -33,11 +33,23 @@ public class AmazingNumber {
         return false;
     }
 
+    private boolean isPalindromic() {
+        String stringNumber = this.number + "";
+        int stringLength = stringNumber.length();
+        for (int i = 0; i < stringLength / 2; i++) {
+            if (stringNumber.charAt(i) != stringNumber.charAt(stringLength - 1 - i)) {
+                return false;
+            }
+        }
+        return true;
+    }
+
     public void printProperties() {
         System.out.println("Properties of " + this.number);
-        System.out.println("\teven: " + isEven());
-        System.out.println("\todd: " + isOdd());
-        System.out.println("\tbuzz: " + isBuzz());
-        System.out.println("\tduck: " + isDuck());
+        System.out.println("        even: " + isEven());
+        System.out.println("         odd: " + isOdd());
+        System.out.println("        buzz: " + isBuzz());
+        System.out.println("        duck: " + isDuck());
+        System.out.println(" palindromic: " + isPalindromic());
     }
 }

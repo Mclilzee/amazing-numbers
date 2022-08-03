@@ -5,7 +5,7 @@ import java.util.Scanner;
 public class App {
 
     public static void main(String[] args) {
-
+        inputRequest();
     }
 
     public static void inputRequest() {
@@ -15,11 +15,11 @@ public class App {
 
                 Supported requests:
                 - enter a natural number to know its properties;
-                - enter 0 to exit.
-                                
+                - enter 0 to exit.           
                 """);
 
         while (true) {
+            System.out.println();
             System.out.print("Enter a natural number: ");
             String input = scanner.nextLine();
             System.out.println();
