@@ -1,5 +1,7 @@
 package amazing.numbers;
 
+import java.text.NumberFormat;
+
 public class AmazingNumber {
     private final long number;
 
@@ -45,7 +47,10 @@ public class AmazingNumber {
     }
 
     public void printProperties() {
-        System.out.println("Properties of " + this.number);
+        NumberFormat readableNumbers = NumberFormat.getInstance();
+        readableNumbers.setGroupingUsed(true);
+
+        System.out.println("Properties of " + readableNumbers.format(this.number));
         System.out.println("        even: " + isEven());
         System.out.println("         odd: " + isOdd());
         System.out.println("        buzz: " + isBuzz());
