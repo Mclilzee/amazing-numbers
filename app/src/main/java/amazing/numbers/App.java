@@ -32,7 +32,9 @@ public class App {
     }
 
     private static void explainNumber(int number) {
-        if (number % 7 == 0) {
+        if (number % 7 == 0 && number % 10 == 7) {
+            System.out.println(number + " is divisible by 7 and ends with 7.");
+        } else if (number % 7 == 0) {
             System.out.println(number + " is divisible by 7.");
         } else if (number % 10 == 7) {
             System.out.println(number + " ends with 7.");
