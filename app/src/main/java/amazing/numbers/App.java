@@ -10,15 +10,7 @@ public class App {
 
     public static void inputRequest() {
         Scanner scanner = new Scanner(System.in);
-        System.out.println("Welcome to Amazing Numbers!\n");
-        System.out.println("Supported requests:");
-        System.out.println("- enter a natural number to know its properties;");
-        System.out.println("- enter two natural numbers to obtain the properties of the list:");
-        System.out.println("  * the first parameter represents a starting number;");
-        System.out.println("  * the second parameter shows how many consecutive numbers are to be processed;");
-        System.out.println("- separate the parameters with one space;");
-        System.out.println("- enter 0 to exit.");
-        System.out.println();
+        printInstructions();
 
         while (true) {
             System.out.println();
@@ -27,7 +19,9 @@ public class App {
             String input = userInputs[0];
             System.out.println();
 
-            if (!input.matches("\\d*")) {
+            if (input.isEmpty()) {
+                printInstructions();
+            } else if (!input.matches("\\d*")) {
                 System.out.println("The first parameter should be a natural number or zero.");
             } else if (input.equals("0")) {
                 System.out.println("Goodbye!");
@@ -53,5 +47,16 @@ public class App {
         long number = Long.parseLong(input);
 
         new AmazingNumber(number).printDetailedProperties();
+    }
+
+    public static void printInstructions() {
+        System.out.println("Welcome to Amazing Numbers!\n");
+        System.out.println("Supported requests:");
+        System.out.println("- enter a natural number to know its properties;");
+        System.out.println("- enter two natural numbers to obtain the properties of the list:");
+        System.out.println("  * the first parameter represents a starting number;");
+        System.out.println("  * the second parameter shows how many consecutive numbers are to be processed;");
+        System.out.println("- separate the parameters with one space;");
+        System.out.println("- enter 0 to exit.");
     }
 }
