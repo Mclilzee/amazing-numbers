@@ -1,6 +1,8 @@
 package amazing.numbers;
 
 import java.text.NumberFormat;
+import java.util.ArrayList;
+import java.util.List;
 
 public class AmazingNumber {
     private final long number;
@@ -71,6 +73,41 @@ public class AmazingNumber {
     }
 
     public void printSimpleProperties() {
+        List<String> properties = new ArrayList<>();
 
+        if (isBuzz()) {
+            properties.add("buzz");
+        }
+
+        if (isDuck()) {
+            properties.add("duck");
+        }
+
+        if (isPalindromic()) {
+            properties.add("palindromic");
+        }
+
+        if (isGapful()) {
+            properties.add("gapful");
+        }
+
+        if (isEven()) {
+            properties.add("even");
+        }
+
+        if (isOdd()) {
+            properties.add("odd");
+        }
+
+        System.out.printf("%d is ", number);
+
+        for (int i = 0; i < properties.size(); i++) {
+            if (i == properties.size() - 1) {
+                System.out.print(properties.get(i));
+            } else {
+                System.out.print(properties.get(i) + ", ");
+            }
+        }
+        System.out.println();
     }
 }
