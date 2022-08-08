@@ -28,9 +28,10 @@ public class App {
             } else if (input.equals("0")) {
                 System.out.println("Goodbye!");
                 break;
+            } else if (userInputs.length == 1) {
+                singleInputProcessing(input);
             } else {
-                AmazingNumber number = new AmazingNumber(Long.parseLong(input));
-                number.printDetailedProperties();
+                multipleInputsProcessing(userInputs);
             }
         }
     }
@@ -42,5 +43,11 @@ public class App {
         for (int i = 0; i < length; i++) {
             new AmazingNumber(number + i).printSimpleProperties();
         }
+    }
+
+    public static void singleInputProcessing(String input) {
+        long number = Long.parseLong(input);
+
+        new AmazingNumber(number).printDetailedProperties();
     }
 }
