@@ -19,7 +19,8 @@ public class App {
         while (true) {
             System.out.println();
             System.out.print("Enter a request: ");
-            String input = scanner.nextLine();
+            String[] userInputs = scanner.nextLine().split("");
+            String input = userInputs[0];
             System.out.println();
 
             if (!input.matches("\\d*")) {
@@ -29,8 +30,17 @@ public class App {
                 break;
             } else {
                 AmazingNumber number = new AmazingNumber(Long.parseLong(input));
-                number.printProperties();
+                number.printDetailedProperties();
             }
+        }
+    }
+
+    public static void multipleInputsProcessing(String[] inputs) {
+        long number = Long.parseLong(inputs[0]);
+        int length = Integer.parseInt(inputs[1]);
+
+        for (int i = 0; i < length; i++) {
+            new AmazingNumber(number + i).printSimpleProperties();
         }
     }
 }

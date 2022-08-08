@@ -46,7 +46,7 @@ public class AmazingNumber {
         return true;
     }
 
-    public void printProperties() {
+    public void printDetailedProperties() {
         NumberFormat readableNumbers = NumberFormat.getInstance();
         readableNumbers.setGroupingUsed(true);
 
@@ -56,5 +56,9 @@ public class AmazingNumber {
         System.out.println("        buzz: " + isBuzz());
         System.out.println("        duck: " + isDuck());
         System.out.println(" palindromic: " + isPalindromic());
+    }
+
+    public void printSimpleProperties() {
+
     }
 }
