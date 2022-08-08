@@ -46,6 +46,17 @@ public class AmazingNumber {
         return true;
     }
 
+    private boolean isGapful() {
+        if (number / 100 == 0) {
+            return false;
+        }
+
+        String[] numberArray = String.valueOf(number).split("");
+        int firstAndLastDigit = Integer.parseInt(numberArray[0] + numberArray[numberArray.length - 1]);
+
+        return number % firstAndLastDigit == 0;
+    }
+
     public void printDetailedProperties() {
         NumberFormat readableNumbers = NumberFormat.getInstance();
         readableNumbers.setGroupingUsed(true);
