@@ -62,11 +62,12 @@ public class AmazingNumber {
         readableNumbers.setGroupingUsed(true);
 
         System.out.println("Properties of " + readableNumbers.format(this.number));
-        System.out.println("        even: " + isEven());
-        System.out.println("         odd: " + isOdd());
         System.out.println("        buzz: " + isBuzz());
         System.out.println("        duck: " + isDuck());
         System.out.println(" palindromic: " + isPalindromic());
+        System.out.println("      gapful: " + isGapful());
+        System.out.println("        even: " + isEven());
+        System.out.println("         odd: " + isOdd());
     }
 
     public void printSimpleProperties() {

@@ -19,7 +19,7 @@ public class App {
         while (true) {
             System.out.println();
             System.out.print("Enter a request: ");
-            String[] userInputs = scanner.nextLine().split("");
+            String[] userInputs = scanner.nextLine().split(" ");
             String input = userInputs[0];
             System.out.println();
 
