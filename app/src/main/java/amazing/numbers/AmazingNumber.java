@@ -59,6 +59,19 @@ public class AmazingNumber {
         return number % firstAndLastDigit == 0;
     }
 
+    private boolean isSpy() {
+        String[] numbers = String.valueOf(this.number).split("");
+        int product = 1;
+        int sum = 0;
+        for (String number : numbers) {
+            int integer = Integer.parseInt(number);
+            product *= integer;
+            sum += integer;
+        }
+
+        return sum == product;
+    }
+
     public void printDetailedProperties() {
         NumberFormat readableNumbers = NumberFormat.getInstance();
         readableNumbers.setGroupingUsed(true);
@@ -68,6 +81,7 @@ public class AmazingNumber {
         System.out.println("        duck: " + isDuck());
         System.out.println(" palindromic: " + isPalindromic());
         System.out.println("      gapful: " + isGapful());
+        System.out.println("         spy: " + isSpy());
         System.out.println("        even: " + isEven());
         System.out.println("         odd: " + isOdd());
     }
@@ -85,6 +99,10 @@ public class AmazingNumber {
 
         if (isPalindromic()) {
             properties.add("palindromic");
+        }
+
+        if (isSpy()) {
+            properties.add("spy");
         }
 
         if (isGapful()) {
