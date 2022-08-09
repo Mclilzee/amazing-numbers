@@ -35,8 +35,14 @@ public class App {
     }
 
     public static void multipleInputsProcessing(String[] inputs) {
+        if (!inputs[1].matches("\\d+") || Integer.parseInt(inputs[1]) < 0) {
+            System.out.println("second parameter should be a natural number");
+            return;
+        }
+
         long number = Long.parseLong(inputs[0]);
         int length = Integer.parseInt(inputs[1]);
+
 
         for (int i = 0; i < length; i++) {
             new AmazingNumber(number + i).printSimpleProperties();
