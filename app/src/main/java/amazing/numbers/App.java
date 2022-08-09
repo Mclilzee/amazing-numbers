@@ -17,37 +17,33 @@ public class App {
             System.out.println();
             System.out.print("Enter a request: ");
             String[] userInputs = scanner.nextLine().split(" ");
-            String input = userInputs[0];
             System.out.println();
 
-            if (input.isEmpty()) {
-                printInstructions();
-            } else if (!input.matches("\\d*")) {
-                System.out.println("The first parameter should be a natural number or zero.");
-            } else if (input.equals("0")) {
+            if (!isValidInput(userInputs)) {
+                continue;
+            }
+
+            if (userInputs.length == 1 && userInputs[0].equals("0")) {
                 System.out.println("Goodbye!");
                 break;
-            } else if (userInputs.length == 1) {
-                singleInputProcessing(input);
-            } else if (userInputs.length == 2){
+            }
+
+            if (userInputs.length == 1) {
+                singleInputProcessing(userInputs);
+            } else if (userInputs.length == 2) {
                 numberRangeInput(userInputs);
             } else if (userInputs.length == 3) {
                 propertySearchInput(userInputs);
             } else {
-                System.out.println("Wrong input.");
+                System.out.println("Wrong input values range.");
             }
         }
     }
 
     public static void numberRangeInput(String[] inputs) {
-        if (!inputs[1].matches("\\d+") || Integer.parseInt(inputs[1]) < 0) {
-            System.out.println("second parameter should be a natural number");
-            return;
-        }
 
         long number = Long.parseLong(inputs[0]);
         int length = Integer.parseInt(inputs[1]);
-
 
         for (int i = 0; i < length; i++) {
             new AmazingNumber(number + i).printSimpleProperties();
@@ -55,11 +51,10 @@ public class App {
     }
 
     public static void propertySearchInput(String[] inputs) {
-
     }
 
-    public static void singleInputProcessing(String input) {
-        long number = Long.parseLong(input);
+    public static void singleInputProcessing(String[] input) {
+        long number = Long.parseLong(input[0]);
 
         new AmazingNumber(number).printDetailedProperties();
     }
@@ -73,5 +68,39 @@ public class App {
         System.out.println("  * the second parameter shows how many consecutive numbers are to be processed;");
         System.out.println("- separate the parameters with one space;");
         System.out.println("- enter 0 to exit.");
+    }
+
+    public static boolean isValidInput(String[] inputs) {
+        if (inputs.length == 0) {
+            printInstructions();
+            return false;
+        }
+
+        if (inputs.length == 1) {
+            return checkFirstParameter(inputs[0]);
+        } else {
+            return checkFirstAndSecondParameter(inputs[0], inputs[1]);
+        }
+    }
+
+    private static boolean checkFirstParameter(String input) {
+        if (input.matches("\\d+") && Integer.parseInt(input) >= 0) {
+            return true;
+        } else {
+            System.out.println("The first parameter should be a natural number or zero.");
+            return false;
+        }
+    }
+
+    private static boolean checkFirstAndSecondParameter(String firstInput, String secondInput) {
+        if (!firstInput.matches("\\d+") || Integer.parseInt(firstInput) < 0) {
+            System.out.println("The first parameter should be a natural number or zero.");
+            return false;
+        } else if (!secondInput.matches("\\d+") || Integer.parseInt(secondInput) < 0){
+            System.out.println("second parameter should be a natural number");
+            return false;
+        }
+
+        return true;
     }
 }
