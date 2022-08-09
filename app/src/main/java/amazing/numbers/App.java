@@ -53,8 +53,20 @@ public class App {
 
     public static void propertySearchInput(String[] inputs) {
         long number = Long.parseLong(inputs[0]);
-        int length = Integer.parseInt(inputs[1]);
+        int iterate = Integer.parseInt(inputs[1]);
         String searchProperty = inputs[2];
+
+        for (long i = 0; i < Long.MAX_VALUE; i++) {
+            AmazingNumber amazingNumber = new AmazingNumber(number + i);
+            if (checkProperty(amazingNumber, searchProperty)) {
+                amazingNumber.printSimpleProperties();
+                iterate--;
+            }
+
+            if (iterate == 0) {
+                break;
+            }
+        }
     }
 
     private static boolean checkProperty(AmazingNumber number, String property) {
