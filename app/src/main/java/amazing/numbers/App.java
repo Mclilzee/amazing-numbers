@@ -1,6 +1,8 @@
 package amazing.numbers;
 
-import java.sql.SQLOutput;
+import java.security.InvalidParameterException;
+import java.util.Arrays;
+import java.util.Locale;
 import java.util.Scanner;
 
 public class App {
@@ -41,7 +43,6 @@ public class App {
     }
 
     public static void numberRangeInput(String[] inputs) {
-
         long number = Long.parseLong(inputs[0]);
         int length = Integer.parseInt(inputs[1]);
 
@@ -51,6 +52,31 @@ public class App {
     }
 
     public static void propertySearchInput(String[] inputs) {
+        long number = Long.parseLong(inputs[0]);
+        int length = Integer.parseInt(inputs[1]);
+        String searchProperty = inputs[2];
+    }
+
+    private static boolean checkProperty(AmazingNumber number, String property) {
+
+        switch (property) {
+            case "buzz":
+                return number.isBuzz();
+            case "duck":
+                return number.isDuck();
+            case "palindromic":
+                return number.isPalindromic();
+            case "gapful":
+                return number.isGapful();
+            case "spy":
+                return number.isSpy();
+            case "even":
+                return number.isEven();
+            case "odd":
+                return number.isOdd();
+        }
+
+        throw new InvalidParameterException();
     }
 
     public static void singleInputProcessing(String[] input) {
@@ -71,19 +97,21 @@ public class App {
     }
 
     public static boolean isValidInput(String[] inputs) {
-        if (inputs.length == 0) {
+        if (inputs[0].isEmpty()) {
             printInstructions();
             return false;
         }
 
         if (inputs.length == 1) {
-            return checkFirstParameter(inputs[0]);
+            return isFirstInputValid(inputs[0]);
+        } else if (inputs.length == 2) {
+            return isFirstInputValid(inputs[0]) && isSecondInputValid(inputs[1]);
         } else {
-            return checkFirstAndSecondParameter(inputs[0], inputs[1]);
+            return isFirstInputValid(inputs[0]) && isSecondInputValid(inputs[1]) && isThirdInputValid(inputs[2]);
         }
     }
 
-    private static boolean checkFirstParameter(String input) {
+    private static boolean isFirstInputValid(String input) {
         if (input.matches("\\d+") && Integer.parseInt(input) >= 0) {
             return true;
         } else {
@@ -92,15 +120,26 @@ public class App {
         }
     }
 
-    private static boolean checkFirstAndSecondParameter(String firstInput, String secondInput) {
-        if (!firstInput.matches("\\d+") || Integer.parseInt(firstInput) < 0) {
-            System.out.println("The first parameter should be a natural number or zero.");
-            return false;
-        } else if (!secondInput.matches("\\d+") || Integer.parseInt(secondInput) < 0){
+    private static boolean isSecondInputValid(String input) {
+        if (input.matches("\\d+") && Integer.parseInt(input) >= 0) {
+            return true;
+        } else {
             System.out.println("second parameter should be a natural number");
             return false;
         }
+    }
 
-        return true;
+    private static boolean isThirdInputValid(String input) {
+        String[] properties = {"BUZZ", "DUCK", "PALINDROMIC", "GAPFUL", "SPY", "EVEN", "ODD"};
+
+        for (String property : properties) {
+            if (input.equalsIgnoreCase(property)) {
+                return true;
+            }
+        }
+
+        System.out.printf("The property [%s] is wrong.\n", input.toUpperCase());
+        System.out.printf("Available properties: %s\n", Arrays.toString(properties));
+        return false;
     }
 }
