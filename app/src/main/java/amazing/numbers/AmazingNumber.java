@@ -99,7 +99,7 @@ public class AmazingNumber {
             properties.add("odd");
         }
 
-        System.out.printf("%d is ", number);
+        System.out.printf("\t\t%d is ", number);
 
         for (int i = 0; i < properties.size(); i++) {
             if (i == properties.size() - 1) {
