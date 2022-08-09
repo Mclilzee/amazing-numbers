@@ -11,19 +11,19 @@ public class AmazingNumber {
         this.number = number;
     }
 
-    private boolean isEven() {
+    public boolean isEven() {
         return this.number % 2 == 0;
     }
 
-    private boolean isOdd() {
+    public boolean isOdd() {
         return this.number % 2 != 0;
     }
 
-    private boolean isBuzz() {
+    public boolean isBuzz() {
         return this.number % 7 == 0 || this.number % 10 == 7;
     }
 
-    private boolean isDuck() {
+    public boolean isDuck() {
         long copyNumber = this.number;
         while (copyNumber > 0) {
             byte digit = (byte) (copyNumber % 10);
@@ -37,7 +37,7 @@ public class AmazingNumber {
         return false;
     }
 
-    private boolean isPalindromic() {
+    public boolean isPalindromic() {
         String stringNumber = this.number + "";
         int stringLength = stringNumber.length();
         for (int i = 0; i < stringLength / 2; i++) {
@@ -48,7 +48,7 @@ public class AmazingNumber {
         return true;
     }
 
-    private boolean isGapful() {
+    public boolean isGapful() {
         if (number / 100 == 0) {
             return false;
         }
@@ -59,7 +59,7 @@ public class AmazingNumber {
         return number % firstAndLastDigit == 0;
     }
 
-    private boolean isSpy() {
+    public boolean isSpy() {
         String[] numbers = String.valueOf(this.number).split("");
         int product = 1;
         int sum = 0;

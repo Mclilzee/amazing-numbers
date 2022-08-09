@@ -1,5 +1,6 @@
 package amazing.numbers;
 
+import java.sql.SQLOutput;
 import java.util.Scanner;
 
 public class App {
@@ -28,13 +29,17 @@ public class App {
                 break;
             } else if (userInputs.length == 1) {
                 singleInputProcessing(input);
+            } else if (userInputs.length == 2){
+                numberRangeInput(userInputs);
+            } else if (userInputs.length == 3) {
+                propertySearchInput(userInputs);
             } else {
-                multipleInputsProcessing(userInputs);
+                System.out.println("Wrong input.");
             }
         }
     }
 
-    public static void multipleInputsProcessing(String[] inputs) {
+    public static void numberRangeInput(String[] inputs) {
         if (!inputs[1].matches("\\d+") || Integer.parseInt(inputs[1]) < 0) {
             System.out.println("second parameter should be a natural number");
             return;
@@ -47,6 +52,10 @@ public class App {
         for (int i = 0; i < length; i++) {
             new AmazingNumber(number + i).printSimpleProperties();
         }
+    }
+
+    public static void propertySearchInput(String[] inputs) {
+
     }
 
     public static void singleInputProcessing(String input) {
