@@ -2,10 +2,11 @@ package amazing.numbers;
 
 import java.security.InvalidParameterException;
 import java.util.Arrays;
-import java.util.Locale;
 import java.util.Scanner;
 
 public class App {
+    private static final String[] properties = {"BUZZ", "DUCK", "PALINDROMIC", "GAPFUL", "SPY", "EVEN", "ODD", "SUNNY", "SQUARE"};
+    private static final String[][] mutallyExeclusive = {{"EVEN", "ODD"}, {"DUCK", "SPY"}, {"SUNNY", "SQUARE"}};
 
     public static void main(String[] args) {
         inputRequest();
@@ -124,8 +125,10 @@ public class App {
             return isFirstInputValid(inputs[0]);
         } else if (inputs.length == 2) {
             return isFirstInputValid(inputs[0]) && isSecondInputValid(inputs[1]);
-        } else {
+        } else if (inputs.length == 3) {
             return isFirstInputValid(inputs[0]) && isSecondInputValid(inputs[1]) && isThirdInputValid(inputs[2]);
+        } else {
+            return isFirstInputValid(inputs[0]) && isSecondInputValid(inputs[1]) && isThirdAndFourthInputsCompatable(inputs[2], inputs[3]);
         }
     }
 
@@ -148,16 +151,32 @@ public class App {
     }
 
     private static boolean isThirdInputValid(String input) {
-        String[] properties = {"BUZZ", "DUCK", "PALINDROMIC", "GAPFUL", "SPY", "EVEN", "ODD", "SUNNY", "SQUARE"};
 
+        if (doesPropertyExist(input)) {
+            return true;
+        }
+
+        System.out.printf("The property [%s] is wrong.\n", input.toUpperCase());
+        System.out.printf("Available properties: %s\n", Arrays.toString(properties));
+        return false;
+    }
+
+    private static boolean isThirdAndFourthInputsCompatable(String firstInput, String secondInput) {
+        if (!doesPropertyExist(firstInput) || !doesPropertyExist(secondInput)) {
+            System.out.printf("The properties [%s, %s] is wrong.\n", firstInput, secondInput);
+            System.out.printf("Available properties: %s\n", Arrays.toString(properties));
+            return false;
+        }
+
+        return true;
+    }
+
+    private static boolean doesPropertyExist(String input) {
         for (String property : properties) {
             if (input.equalsIgnoreCase(property)) {
                 return true;
             }
         }
-
-        System.out.printf("The property [%s] is wrong.\n", input.toUpperCase());
-        System.out.printf("Available properties: %s\n", Arrays.toString(properties));
         return false;
     }
 }
