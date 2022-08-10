@@ -6,7 +6,7 @@ import java.util.Scanner;
 
 public class App {
     private static final String[] properties = {"BUZZ", "DUCK", "PALINDROMIC", "GAPFUL", "SPY", "SUNNY", "SQUARE", "EVEN", "ODD"};
-    private static final String[][] mutallyExeclusive = {{"EVEN", "ODD"}, {"DUCK", "SPY"}, {"SUNNY", "SQUARE"}};
+    private static final String[][] mutuallyExclusive = {{"EVEN", "ODD"}, {"DUCK", "SPY"}, {"SUNNY", "SQUARE"}};
 
     public static void main(String[] args) {
         inputRequest();
@@ -57,7 +57,7 @@ public class App {
         int iterate = Integer.parseInt(inputs[1]);
         String searchProperty = inputs[2];
 
-        for (long i = 0; i < Long.MAX_VALUE; i++) {
+        for (long i = 0; number + i < Long.MAX_VALUE; i++) {
             AmazingNumber amazingNumber = new AmazingNumber(number + i);
             if (checkProperty(amazingNumber, searchProperty)) {
                 amazingNumber.printSimpleProperties();
@@ -111,6 +111,7 @@ public class App {
         System.out.println("  * the first parameter represents a starting number;");
         System.out.println("  * the second parameter shows how many consecutive numbers are to be processed;");
         System.out.println("- two natural numbers and a property to search for;");
+        System.out.println("- two natural numbers and two properties to search for;");
         System.out.println("- separate the parameters with one space;");
         System.out.println("- enter 0 to exit.");
     }
@@ -152,7 +153,7 @@ public class App {
 
     private static boolean isThirdInputValid(String input) {
 
-        if (doesPropertyExist(input)) {
+        if (propertyExists(input)) {
             return true;
         }
 
@@ -162,16 +163,28 @@ public class App {
     }
 
     private static boolean isThirdAndFourthInputsCompatable(String firstInput, String secondInput) {
-        if (!doesPropertyExist(firstInput) || !doesPropertyExist(secondInput)) {
-            System.out.printf("The properties [%s, %s] is wrong.\n", firstInput.toUpperCase(), secondInput.toUpperCase());
+        if (!propertyExists(firstInput) || !propertyExists(secondInput)) {
+            System.out.printf("The properties [%s, %s] are wrong.\n", firstInput.toUpperCase(), secondInput.toUpperCase());
             System.out.printf("Available properties: %s\n", Arrays.toString(properties));
             return false;
+        }
+
+        return validPair(firstInput, secondInput);
+    }
+
+    private static boolean validPair(String firstInput, String secondInput) {
+        for (String[] set : mutuallyExclusive) {
+            if (firstInput.equalsIgnoreCase(set[0]) && secondInput.equalsIgnoreCase(set[1]) || secondInput.equalsIgnoreCase(set[0]) && firstInput.equalsIgnoreCase(set[1])) {
+                System.out.printf("The request contains mutually exclusive properties: [%s, %s]\n", firstInput, secondInput);
+                System.out.println("There are no numbers with these properties.");
+                return false;
+            }
         }
 
         return true;
     }
 
-    private static boolean doesPropertyExist(String input) {
+    private static boolean propertyExists(String input) {
         for (String property : properties) {
             if (input.equalsIgnoreCase(property)) {
                 return true;
