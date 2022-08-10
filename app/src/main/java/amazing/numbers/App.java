@@ -55,11 +55,12 @@ public class App {
     public static void propertySearchInput(String[] inputs) {
         long number = Long.parseLong(inputs[0]);
         int iterate = Integer.parseInt(inputs[1]);
-        String searchProperty = inputs[2];
+        String[] searchProperties = Arrays.copyOfRange(inputs, 2, inputs.length);
 
         for (long i = 0; number + i < Long.MAX_VALUE; i++) {
             AmazingNumber amazingNumber = new AmazingNumber(number + i);
-            if (checkProperty(amazingNumber, searchProperty)) {
+
+            if (checkAllProperties(amazingNumber, searchProperties)) {
                 amazingNumber.printSimpleProperties();
                 iterate--;
             }
@@ -70,7 +71,17 @@ public class App {
         }
     }
 
-    private static boolean checkProperty(AmazingNumber number, String property) {
+    private static boolean checkAllProperties(AmazingNumber number, String[] properties) {
+        for (String property : properties) {
+            if (!numberContainsProperty(number, property)) {
+                return false;
+            }
+        }
+
+        return true;
+    }
+
+    private static boolean numberContainsProperty(AmazingNumber number, String property) {
         property = property.toUpperCase();
 
         switch (property) {
@@ -126,10 +137,8 @@ public class App {
             return isFirstInputValid(inputs[0]);
         } else if (inputs.length == 2) {
             return isFirstInputValid(inputs[0]) && isSecondInputValid(inputs[1]);
-        } else if (inputs.length == 3) {
-            return isFirstInputValid(inputs[0]) && isSecondInputValid(inputs[1]) && isThirdInputValid(inputs[2]);
         } else {
-            return isFirstInputValid(inputs[0]) && isSecondInputValid(inputs[1]) && isThirdAndFourthInputsCompatable(inputs[2], inputs[3]);
+            return isFirstInputValid(inputs[0]) && isSecondInputValid(inputs[1]) && arePropertyInputsValid(Arrays.copyOfRange(inputs, 2, inputs.length));
         }
     }
 
@@ -151,33 +160,28 @@ public class App {
         }
     }
 
-    private static boolean isThirdInputValid(String input) {
+    private static boolean arePropertyInputsValid(String[] inputs) {
 
-        if (propertyExists(input)) {
-            return true;
-        }
-
-        System.out.printf("The property [%s] is wrong.\n", input.toUpperCase());
-        System.out.printf("Available properties: %s\n", Arrays.toString(properties));
-        return false;
-    }
-
-    private static boolean isThirdAndFourthInputsCompatable(String firstInput, String secondInput) {
-        if (!propertyExists(firstInput) || !propertyExists(secondInput)) {
-            System.out.printf("The properties [%s, %s] are wrong.\n", firstInput.toUpperCase(), secondInput.toUpperCase());
-            System.out.printf("Available properties: %s\n", Arrays.toString(properties));
-            return false;
-        }
-
-        return validPair(firstInput, secondInput);
-    }
-
-    private static boolean validPair(String firstInput, String secondInput) {
-        for (String[] set : mutuallyExclusive) {
-            if (firstInput.equalsIgnoreCase(set[0]) && secondInput.equalsIgnoreCase(set[1]) || secondInput.equalsIgnoreCase(set[0]) && firstInput.equalsIgnoreCase(set[1])) {
-                System.out.printf("The request contains mutually exclusive properties: [%s, %s]\n", firstInput, secondInput);
-                System.out.println("There are no numbers with these properties.");
+        for (String property : inputs) {
+            if (!propertyExists(property)) {
+                System.out.printf("The property %s %s wrong.\n", Arrays.toString(inputs), inputs.length == 1 ? "is" : "are");
+                System.out.printf("Available properties: %s\n", Arrays.toString(properties));
                 return false;
+            }
+        }
+
+        return validProperties(inputs);
+    }
+
+    private static boolean validProperties(String[] inputs) {
+        for (String[] set : mutuallyExclusive) {
+
+            for (int i = 1; i < inputs.length; i++) {
+                if (inputs[i - 1].equalsIgnoreCase(set[0]) && inputs[i].equalsIgnoreCase(set[1]) || inputs[i - 1].equalsIgnoreCase(set[1]) && inputs[i].equalsIgnoreCase(set[0])) {
+                    System.out.printf("The request contains mutually exclusive properties: %s\n", Arrays.toString(inputs));
+                    System.out.println("There are no numbers with these properties.");
+                    return false;
+                }
             }
         }
 
