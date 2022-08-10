@@ -35,10 +35,8 @@ public class App {
                 singleInputProcessing(userInputs);
             } else if (userInputs.length == 2) {
                 numberRangeInput(userInputs);
-            } else if (userInputs.length == 3) {
-                propertySearchInput(userInputs);
             } else {
-                System.out.println("Wrong input values range.");
+                propertySearchInput(userInputs);
             }
         }
     }
@@ -161,10 +159,12 @@ public class App {
     }
 
     private static boolean arePropertyInputsValid(String[] inputs) {
+        // Check if properties a multiple values to format output accordingly
+        boolean multi = inputs.length > 1;
 
         for (String property : inputs) {
             if (!propertyExists(property)) {
-                System.out.printf("The property %s %s wrong.\n", Arrays.toString(inputs), inputs.length == 1 ? "is" : "are");
+                System.out.printf("The propert%s %s %s wrong.\n", Arrays.toString(inputs).toUpperCase(), multi ? "are" : "is", multi ? "ies" : "y");
                 System.out.printf("Available properties: %s\n", Arrays.toString(properties));
                 return false;
             }
@@ -175,10 +175,9 @@ public class App {
 
     private static boolean validProperties(String[] inputs) {
         for (String[] set : mutuallyExclusive) {
-
             for (int i = 1; i < inputs.length; i++) {
                 if (inputs[i - 1].equalsIgnoreCase(set[0]) && inputs[i].equalsIgnoreCase(set[1]) || inputs[i - 1].equalsIgnoreCase(set[1]) && inputs[i].equalsIgnoreCase(set[0])) {
-                    System.out.printf("The request contains mutually exclusive properties: %s\n", Arrays.toString(inputs));
+                    System.out.printf("The request contains mutually exclusive properties: %s\n", Arrays.toString(set).toUpperCase());
                     System.out.println("There are no numbers with these properties.");
                     return false;
                 }
