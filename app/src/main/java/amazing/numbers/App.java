@@ -1,12 +1,14 @@
 package amazing.numbers;
 
 import java.security.InvalidParameterException;
+import java.util.ArrayList;
 import java.util.Arrays;
+import java.util.List;
 import java.util.Scanner;
 
 public class App {
     private static final String[] properties = {"BUZZ", "DUCK", "PALINDROMIC", "GAPFUL", "SPY", "SUNNY", "SQUARE", "EVEN", "ODD"};
-    private static final String[][] mutuallyExclusive = {{"EVEN", "ODD"}, {"DUCK", "SPY"}, {"SUNNY", "SQUARE"}};
+    private static final String[][] mutuallyExclusive = {{"EVEN", "ODD"}, {"DUCK", "SPY"}, {"SQUARE", "SUNNY"}};
 
     public static void main(String[] args) {
         inputRequest();
@@ -159,15 +161,22 @@ public class App {
     }
 
     private static boolean arePropertyInputsValid(String[] inputs) {
-        // Check if properties a multiple values to format output accordingly
-        boolean multi = inputs.length > 1;
+        boolean containsWrongProperty = false;
+        List<String> wrongProperties = new ArrayList<>();
 
         for (String property : inputs) {
             if (!propertyExists(property)) {
-                System.out.printf("The propert%s %s %s wrong.\n", Arrays.toString(inputs).toUpperCase(), multi ? "are" : "is", multi ? "ies" : "y");
-                System.out.printf("Available properties: %s\n", Arrays.toString(properties));
-                return false;
+                wrongProperties.add(property);
+                containsWrongProperty = true;
             }
+        }
+
+        // Check if properties a multiple values to format output accordingly
+        boolean multi = wrongProperties.size() > 1;
+        if (containsWrongProperty) {
+            System.out.printf("The propert%s %s %s wrong.\n", multi ? "ies" : "y", wrongProperties.toString().toUpperCase(), multi ? "are" : "is");
+            System.out.printf("Available properties: %s\n", Arrays.toString(properties));
+            return false;
         }
 
         return validProperties(inputs);
