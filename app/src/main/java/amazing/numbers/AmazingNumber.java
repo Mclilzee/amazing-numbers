@@ -72,6 +72,21 @@ public class AmazingNumber {
         return sum == product;
     }
 
+    public boolean isSunny() {
+        return checkIfSquare(this.number + 1);
+    }
+
+    public boolean isSquare() {
+        return checkIfSquare(this.number);
+    }
+
+    private boolean checkIfSquare(long number) {
+        double square = Math.sqrt(number);
+        double floor = Math.floor(Math.sqrt(number));
+
+        return square - floor == 0;
+    }
+
     public void printDetailedProperties() {
         NumberFormat readableNumbers = NumberFormat.getInstance();
         readableNumbers.setGroupingUsed(true);
@@ -82,6 +97,8 @@ public class AmazingNumber {
         System.out.println(" palindromic: " + isPalindromic());
         System.out.println("      gapful: " + isGapful());
         System.out.println("         spy: " + isSpy());
+        System.out.println("      square: " + isSquare());
+        System.out.println("       sunny: " + isSunny());
         System.out.println("        even: " + isEven());
         System.out.println("         odd: " + isOdd());
     }
@@ -109,11 +126,17 @@ public class AmazingNumber {
             properties.add("gapful");
         }
 
-        if (isEven()) {
-            properties.add("even");
+        if (isSunny()) {
+            properties.add("sunny");
         }
 
-        if (isOdd()) {
+        if (isSquare()) {
+            properties.add("square");
+        }
+
+        if (isEven()) {
+            properties.add("even");
+        } else {
             properties.add("odd");
         }
 
