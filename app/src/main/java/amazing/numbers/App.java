@@ -5,7 +5,7 @@ import java.util.Arrays;
 import java.util.Scanner;
 
 public class App {
-    private static final String[] properties = {"BUZZ", "DUCK", "PALINDROMIC", "GAPFUL", "SPY", "EVEN", "ODD", "SUNNY", "SQUARE"};
+    private static final String[] properties = {"BUZZ", "DUCK", "PALINDROMIC", "GAPFUL", "SPY", "SUNNY", "SQUARE", "EVEN", "ODD"};
     private static final String[][] mutallyExeclusive = {{"EVEN", "ODD"}, {"DUCK", "SPY"}, {"SUNNY", "SQUARE"}};
 
     public static void main(String[] args) {
@@ -163,7 +163,7 @@ public class App {
 
     private static boolean isThirdAndFourthInputsCompatable(String firstInput, String secondInput) {
         if (!doesPropertyExist(firstInput) || !doesPropertyExist(secondInput)) {
-            System.out.printf("The properties [%s, %s] is wrong.\n", firstInput, secondInput);
+            System.out.printf("The properties [%s, %s] is wrong.\n", firstInput.toUpperCase(), secondInput.toUpperCase());
             System.out.printf("Available properties: %s\n", Arrays.toString(properties));
             return false;
         }
