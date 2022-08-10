@@ -70,21 +70,22 @@ public class App {
     }
 
     private static boolean checkProperty(AmazingNumber number, String property) {
+        property = property.toUpperCase();
 
         switch (property) {
-            case "buzz":
+            case "BUZZ":
                 return number.isBuzz();
-            case "duck":
+            case "DUCK":
                 return number.isDuck();
-            case "palindromic":
+            case "PALINDROMIC":
                 return number.isPalindromic();
-            case "gapful":
+            case "GAPFUL":
                 return number.isGapful();
-            case "spy":
+            case "SPY":
                 return number.isSpy();
-            case "even":
+            case "EVEN":
                 return number.isEven();
-            case "odd":
+            case "ODD":
                 return number.isOdd();
         }
 
