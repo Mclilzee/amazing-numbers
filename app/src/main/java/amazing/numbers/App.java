@@ -125,7 +125,7 @@ public class App {
     }
 
     private static boolean isFirstInputValid(String input) {
-        if (input.matches("\\d+") && Integer.parseInt(input) >= 0) {
+        if (input.matches("\\d+") && Long.parseLong(input) >= 0) {
             return true;
         } else {
             System.out.println("The first parameter should be a natural number or zero.");
@@ -134,7 +134,7 @@ public class App {
     }
 
     private static boolean isSecondInputValid(String input) {
-        if (input.matches("\\d+") && Integer.parseInt(input) >= 0) {
+        if (input.matches("\\d+") && Long.parseLong(input) >= 0) {
             return true;
         } else {
             System.out.println("second parameter should be a natural number");
