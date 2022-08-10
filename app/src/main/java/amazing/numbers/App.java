@@ -87,6 +87,10 @@ public class App {
                 return number.isEven();
             case "ODD":
                 return number.isOdd();
+            case "SUNNY":
+                return number.isSunny();
+            case "SQUARE":
+                return number.isSquare();
         }
 
         throw new InvalidParameterException();
@@ -144,7 +148,7 @@ public class App {
     }
 
     private static boolean isThirdInputValid(String input) {
-        String[] properties = {"BUZZ", "DUCK", "PALINDROMIC", "GAPFUL", "SPY", "EVEN", "ODD"};
+        String[] properties = {"BUZZ", "DUCK", "PALINDROMIC", "GAPFUL", "SPY", "EVEN", "ODD", "SUNNY", "SQUARE"};
 
         for (String property : properties) {
             if (input.equalsIgnoreCase(property)) {
