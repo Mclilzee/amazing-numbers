@@ -155,7 +155,7 @@ public class App {
         if (input.matches("\\d+") && Long.parseLong(input) >= 0) {
             return true;
         } else {
-            System.out.println("second parameter should be a natural number");
+            System.out.println("The second parameter should be a natural number.");
             return false;
         }
     }
