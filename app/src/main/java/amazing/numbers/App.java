@@ -7,8 +7,19 @@ import java.util.List;
 import java.util.Scanner;
 
 public class App {
-    private static final String[] properties = {"BUZZ", "DUCK", "PALINDROMIC", "GAPFUL", "SPY", "SUNNY", "SQUARE", "EVEN", "ODD"};
-    private static final String[][] mutuallyExclusive = {{"EVEN", "ODD"}, {"DUCK", "SPY"}, {"SQUARE", "SUNNY"}};
+    enum Property {
+        BUZZ,
+        DUCK,
+        PALINDROMIC,
+        GAPFUL,
+        SPY,
+        SUNNY,
+        SQUARE,
+        EVEN,
+        ODD
+    }
+
+    private static final Property[][] mutuallyExclusive = {{Property.EVEN, Property.ODD}, {Property.DUCK, Property.SPY}, {Property.SQUARE, Property.SUNNY}};
 
     public static void main(String[] args) {
         inputRequest();
@@ -175,7 +186,7 @@ public class App {
         boolean multi = wrongProperties.size() > 1;
         if (containsWrongProperty) {
             System.out.printf("The propert%s %s %s wrong.\n", multi ? "ies" : "y", wrongProperties.toString().toUpperCase(), multi ? "are" : "is");
-            System.out.printf("Available properties: %s\n", Arrays.toString(properties));
+            System.out.printf("Available properties: %s\n", Arrays.toString(Property.values()));
             return false;
         }
 
@@ -183,9 +194,9 @@ public class App {
     }
 
     private static boolean validProperties(String[] inputs) {
-        for (String[] set : mutuallyExclusive) {
+        for (Property[] set : mutuallyExclusive) {
             for (int i = 1; i < inputs.length; i++) {
-                if (inputs[i - 1].equalsIgnoreCase(set[0]) && inputs[i].equalsIgnoreCase(set[1]) || inputs[i - 1].equalsIgnoreCase(set[1]) && inputs[i].equalsIgnoreCase(set[0])) {
+                if (inputs[i - 1].equalsIgnoreCase(set[0].name()) && inputs[i].equalsIgnoreCase(set[1].name()) || inputs[i - 1].equalsIgnoreCase(set[1].name()) && inputs[i].equalsIgnoreCase(set[0].name())) {
                     System.out.printf("The request contains mutually exclusive properties: %s\n", Arrays.toString(set).toUpperCase());
                     System.out.println("There are no numbers with these properties.");
                     return false;
@@ -197,8 +208,8 @@ public class App {
     }
 
     private static boolean propertyExists(String input) {
-        for (String property : properties) {
-            if (input.equalsIgnoreCase(property)) {
+        for (Property property : Property.values()) {
+            if (input.equalsIgnoreCase(property.name())) {
                 return true;
             }
         }
