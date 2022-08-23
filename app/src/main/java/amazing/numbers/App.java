@@ -18,10 +18,6 @@ public class App {
         MUTUALLY_EXCLUSIVE.add(new String[]{"SQUARE", "SUNNY"});
         MUTUALLY_EXCLUSIVE.add(new String[]{"-EVEN", "-ODD"});
         MUTUALLY_EXCLUSIVE.add(new String[]{"-DUCK", "-SPY"});
-        MUTUALLY_EXCLUSIVE.add(new String[]{"-SQUARE", "-SUNNY"});
-
-
-
 
         for (String property : PROPERTIES) {
             MUTUALLY_EXCLUSIVE.add(new String[]{property, "-" + property});
