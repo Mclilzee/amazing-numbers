@@ -115,7 +115,28 @@ public class AmazingNumber {
     }
 
     public boolean isHappy() {
-        return true;
+        int sum = (int) digitsSquaredSum(number);
+
+        return sum == 1;
+    }
+
+    public boolean isSad() {
+        return !isHappy();
+    }
+
+    private long digitsSquaredSum(long number) {
+        int sum = 0;
+        while (number > 0) {
+            int digit = (int) number % 10;
+            sum += digit * digit;
+
+            number /= 10;
+        }
+
+        if (sum > 9) {
+            sum = (int) digitsSquaredSum(sum);
+        }
+        return sum;
     }
 
     public void printDetailedProperties() {
@@ -131,6 +152,8 @@ public class AmazingNumber {
         System.out.println("      square: " + isSquare());
         System.out.println("       sunny: " + isSunny());
         System.out.println("     jumping: " + isJumping());
+        System.out.println("       happy: " + isHappy());
+        System.out.println("         sad: " + isSad());
         System.out.println("        even: " + isEven());
         System.out.println("         odd: " + isOdd());
     }
@@ -168,6 +191,12 @@ public class AmazingNumber {
 
         if (isJumping()) {
             properties.add("jumping");
+        }
+
+        if (isHappy()) {
+            properties.add("happy");
+        } else {
+            properties.add("sad");
         }
 
         if (isEven()) {
