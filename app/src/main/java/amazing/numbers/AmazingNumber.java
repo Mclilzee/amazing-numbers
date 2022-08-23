@@ -116,6 +116,9 @@ public class AmazingNumber {
 
     public boolean isHappy() {
         int sum = (int) digitsSquaredSum(number);
+        while (sum > 9) {
+            sum = (int) digitsSquaredSum(sum);
+        }
 
         return sum == 1;
     }
@@ -127,15 +130,12 @@ public class AmazingNumber {
     private long digitsSquaredSum(long number) {
         int sum = 0;
         while (number > 0) {
-            int digit = (int) number % 10;
+            int digit = (int) (number % 10);
             sum += digit * digit;
 
             number /= 10;
         }
 
-        if (sum > 9) {
-            sum = (int) digitsSquaredSum(sum);
-        }
         return sum;
     }
 
