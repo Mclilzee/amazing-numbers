@@ -7,22 +7,31 @@ import java.util.List;
 import java.util.Scanner;
 
 public class App {
-    enum Property {
-        BUZZ,
-        DUCK,
-        PALINDROMIC,
-        GAPFUL,
-        SPY,
-        SUNNY,
-        SQUARE,
-        EVEN,
-        ODD,
-        JUMPING
+    private static final String[] PROPERTIES = {"BUZZ", "DUCK", "PALINDROMIC", "GAPFUL", "SPY", "SUNNY", "SQUARE",
+            "EVEN", "ODD", "JUMPING"};
+
+    private static final ArrayList<String[]> MUTUALLY_EXCLUSIVE = new ArrayList<>();
+
+    private static void fillMutuallyExclusiveArray() {
+        MUTUALLY_EXCLUSIVE.add(new String[]{"EVEN", "ODD"});
+        MUTUALLY_EXCLUSIVE.add(new String[]{"DUCK", "SPY"});
+        MUTUALLY_EXCLUSIVE.add(new String[]{"SQUARE", "SUNNY"});
+        MUTUALLY_EXCLUSIVE.add(new String[]{"-EVEN", "-ODD"});
+        MUTUALLY_EXCLUSIVE.add(new String[]{"-DUCK", "-SPY"});
+        MUTUALLY_EXCLUSIVE.add(new String[]{"-SQUARE", "-SUNNY"});
+
+
+
+
+        for (String property : PROPERTIES) {
+            MUTUALLY_EXCLUSIVE.add(new String[]{property, "-" + property});
+        }
+
+        System.out.println(MUTUALLY_EXCLUSIVE);
     }
 
-    private static final Property[][] mutuallyExclusive = {{Property.EVEN, Property.ODD}, {Property.DUCK, Property.SPY}, {Property.SQUARE, Property.SUNNY}};
-
     public static void main(String[] args) {
+        fillMutuallyExclusiveArray();
         inputRequest();
     }
 
@@ -99,30 +108,34 @@ public class App {
     private static boolean numberContainsProperty(AmazingNumber number, String property) {
         property = property.toUpperCase();
 
-        switch (Property.valueOf(property)) {
-            case BUZZ:
+        switch (property) {
+            case "BUZZ":
                 return number.isBuzz();
-            case DUCK:
+            case "DUCK":
                 return number.isDuck();
-            case PALINDROMIC:
+            case "PALINDROMIC":
                 return number.isPalindromic();
-            case GAPFUL:
+            case "GAPFUL":
                 return number.isGapful();
-            case SPY:
+            case "SPY":
                 return number.isSpy();
-            case EVEN:
+            case "EVEN":
                 return number.isEven();
-            case ODD:
+            case "ODD":
                 return number.isOdd();
-            case SUNNY:
+            case "SUNNY":
                 return number.isSunny();
-            case SQUARE:
+            case "SQUARE":
                 return number.isSquare();
-            case JUMPING:
+            case "JUMPING":
                 return number.isJumping();
             default:
                 // if property contain minus, return reverse boolean
-                return !numberContainsProperty(number, property.substring(1));
+                if (property.charAt(0) == '-') {
+                    return !numberContainsProperty(number, property.substring(1));
+                } else {
+                    throw new InvalidParameterException();
+                }
         }
     }
 
@@ -194,7 +207,7 @@ public class App {
         boolean multi = wrongProperties.size() > 1;
         if (containsWrongProperty) {
             System.out.printf("The propert%s %s %s wrong.\n", multi ? "ies" : "y", wrongProperties.toString().toUpperCase(), multi ? "are" : "is");
-            System.out.printf("Available properties: %s\n", Arrays.toString(Property.values()));
+            System.out.printf("Available properties: %s\n", Arrays.toString(PROPERTIES));
             return false;
         }
 
@@ -206,8 +219,8 @@ public class App {
 
         for (int i = 0; i < inputs.length; i++) {
             for (int j = i + 1; j < inputs.length; j++) {
-                Property firstProperty = Property.valueOf(inputs[i].toUpperCase());
-                Property secondProperty = Property.valueOf(inputs[j].toUpperCase());
+                String firstProperty = inputs[i].toUpperCase();
+                String secondProperty = inputs[j].toUpperCase();
 
                 if (propertiesMutuallyExclusive(firstProperty, secondProperty)) {
                     return true;
@@ -218,10 +231,10 @@ public class App {
         return false;
     }
 
-    private static boolean propertiesMutuallyExclusive(Property firstProperty, Property secondProperty) {
-        for (Property[] set : mutuallyExclusive) {
+    private static boolean propertiesMutuallyExclusive(String firstProperty, String secondProperty) {
+        for (String[] set : MUTUALLY_EXCLUSIVE) {
 
-            if (firstProperty == set[0] && secondProperty == set[1] || firstProperty == set[1] && secondProperty == set[0]) {
+            if (firstProperty.equalsIgnoreCase(set[0]) && secondProperty.equalsIgnoreCase(set[1]) || firstProperty.equalsIgnoreCase(set[1]) && secondProperty.equalsIgnoreCase(set[0])) {
                 System.out.printf("The request contains mutually exclusive properties: %s\n", Arrays.toString(set).toUpperCase());
                 System.out.println("There are no numbers with these properties.");
                 return true;
@@ -232,8 +245,8 @@ public class App {
     }
 
     private static boolean propertyExists(String input) {
-        for (Property property : Property.values()) {
-            if (input.equalsIgnoreCase(property.name())) {
+        for (String property : PROPERTIES) {
+            if (input.equalsIgnoreCase(property)) {
                 return true;
             }
         }
