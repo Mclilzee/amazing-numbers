@@ -5,9 +5,17 @@ import java.util.ArrayList;
 import java.util.List;
 
 public class AmazingNumber {
-    private final long number;
+    private long number;
 
     public AmazingNumber(long number) {
+        this.number = number;
+    }
+
+    public long getNumber() {
+        return this.number;
+    }
+
+    public void setNumber(long number) {
         this.number = number;
     }
 

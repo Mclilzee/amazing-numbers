@@ -58,9 +58,11 @@ public class App {
     public static void numberRangeInput(String[] inputs) {
         long number = Long.parseLong(inputs[0]);
         int length = Integer.parseInt(inputs[1]);
+        AmazingNumber amazingNumber = new AmazingNumber(0);
 
         for (int i = 0; i < length; i++) {
-            new AmazingNumber(number + i).printSimpleProperties();
+            amazingNumber.setNumber(number + i);
+            amazingNumber.printSimpleProperties();
         }
     }
 
@@ -68,9 +70,10 @@ public class App {
         long number = Long.parseLong(inputs[0]);
         int iterate = Integer.parseInt(inputs[1]);
         String[] searchProperties = Arrays.copyOfRange(inputs, 2, inputs.length);
+        AmazingNumber amazingNumber = new AmazingNumber(0);
 
-        for (long i = 0; number + i < Long.MAX_VALUE; i++) {
-            AmazingNumber amazingNumber = new AmazingNumber(number + i);
+        for (long i = number; i < Long.MAX_VALUE; i++) {
+            amazingNumber.setNumber(i);
 
             if (checkAllProperties(amazingNumber, searchProperties)) {
                 amazingNumber.printSimpleProperties();
