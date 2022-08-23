@@ -99,30 +99,31 @@ public class App {
     private static boolean numberContainsProperty(AmazingNumber number, String property) {
         property = property.toUpperCase();
 
-        switch (property) {
-            case "BUZZ":
+        switch (Property.valueOf(property)) {
+            case BUZZ:
                 return number.isBuzz();
-            case "DUCK":
+            case DUCK:
                 return number.isDuck();
-            case "PALINDROMIC":
+            case PALINDROMIC:
                 return number.isPalindromic();
-            case "GAPFUL":
+            case GAPFUL:
                 return number.isGapful();
-            case "SPY":
+            case SPY:
                 return number.isSpy();
-            case "EVEN":
+            case EVEN:
                 return number.isEven();
-            case "ODD":
+            case ODD:
                 return number.isOdd();
-            case "SUNNY":
+            case SUNNY:
                 return number.isSunny();
-            case "SQUARE":
+            case SQUARE:
                 return number.isSquare();
-            case "JUMPING":
+            case JUMPING:
                 return number.isJumping();
+            default:
+                // if property contain minus, return reverse boolean
+                return !numberContainsProperty(number, property.substring(1));
         }
-
-        throw new InvalidParameterException();
     }
 
     public static void singleInputProcessing(String[] input) {
