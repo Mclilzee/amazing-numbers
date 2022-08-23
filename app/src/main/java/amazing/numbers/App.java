@@ -16,7 +16,8 @@ public class App {
         SUNNY,
         SQUARE,
         EVEN,
-        ODD
+        ODD,
+        JUMPING
     }
 
     private static final Property[][] mutuallyExclusive = {{Property.EVEN, Property.ODD}, {Property.DUCK, Property.SPY}, {Property.SQUARE, Property.SUNNY}};
@@ -114,6 +115,8 @@ public class App {
                 return number.isSunny();
             case "SQUARE":
                 return number.isSquare();
+            case "JUMPING":
+                return number.isJumping();
         }
 
         throw new InvalidParameterException();
