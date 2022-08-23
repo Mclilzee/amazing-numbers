@@ -16,6 +16,8 @@ public class App {
         MUTUALLY_EXCLUSIVE.add(new String[]{"EVEN", "ODD"});
         MUTUALLY_EXCLUSIVE.add(new String[]{"DUCK", "SPY"});
         MUTUALLY_EXCLUSIVE.add(new String[]{"SQUARE", "SUNNY"});
+        MUTUALLY_EXCLUSIVE.add(new String[]{"HAPPY", "SAD"});
+        MUTUALLY_EXCLUSIVE.add(new String[]{"-HAPPY", "-SAD"});
         MUTUALLY_EXCLUSIVE.add(new String[]{"-EVEN", "-ODD"});
         MUTUALLY_EXCLUSIVE.add(new String[]{"-DUCK", "-SPY"});
 
@@ -125,6 +127,10 @@ public class App {
                 return number.isSquare();
             case "JUMPING":
                 return number.isJumping();
+            case "HAPPY":
+                return number.isHappy();
+            case "SAD":
+                return number.isSad();
             default:
                 // if property contain minus, return reverse boolean
                 if (property.charAt(0) == '-') {
