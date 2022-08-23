@@ -177,6 +177,7 @@ public class App {
         }
     }
 
+    // recieves input of property names only
     private static boolean arePropertyInputsValid(String[] inputs) {
         boolean containsWrongProperty = false;
         List<String> wrongProperties = new ArrayList<>();
@@ -196,21 +197,37 @@ public class App {
             return false;
         }
 
-        return validProperties(inputs);
+        return !mutuallyExclusiveProperties(inputs);
     }
 
-    private static boolean validProperties(String[] inputs) {
-        for (Property[] set : mutuallyExclusive) {
-            for (int i = 1; i < inputs.length; i++) {
-                if (inputs[i - 1].equalsIgnoreCase(set[0].name()) && inputs[i].equalsIgnoreCase(set[1].name()) || inputs[i - 1].equalsIgnoreCase(set[1].name()) && inputs[i].equalsIgnoreCase(set[0].name())) {
-                    System.out.printf("The request contains mutually exclusive properties: %s\n", Arrays.toString(set).toUpperCase());
-                    System.out.println("There are no numbers with these properties.");
-                    return false;
+    // check if properties are not mutually exclusive
+    private static boolean mutuallyExclusiveProperties(String[] inputs) {
+
+        for (int i = 0; i < inputs.length; i++) {
+            for (int j = i + 1; j < inputs.length; j++) {
+                Property firstProperty = Property.valueOf(inputs[i].toUpperCase());
+                Property secondProperty = Property.valueOf(inputs[j].toUpperCase());
+
+                if (propertiesMutuallyExclusive(firstProperty, secondProperty)) {
+                    return true;
                 }
             }
         }
 
-        return true;
+        return false;
+    }
+
+    private static boolean propertiesMutuallyExclusive(Property firstProperty, Property secondProperty) {
+        for (Property[] set : mutuallyExclusive) {
+
+            if (firstProperty == set[0] && secondProperty == set[1] || firstProperty == set[1] && secondProperty == set[0]) {
+                System.out.printf("The request contains mutually exclusive properties: %s\n", Arrays.toString(set).toUpperCase());
+                System.out.println("There are no numbers with these properties.");
+                return true;
+            }
+        }
+
+        return false;
     }
 
     private static boolean propertyExists(String input) {
