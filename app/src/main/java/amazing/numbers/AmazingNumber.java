@@ -87,6 +87,25 @@ public class AmazingNumber {
         return square - floor == 0;
     }
 
+    public boolean isJumping() {
+        long numberCopy = this.number;
+
+        while (numberCopy > 9) {
+            int firstDigit = (int) numberCopy % 10;
+            int secondDigit = (int) (numberCopy % 100) / 10;
+
+            int difference = Math.abs(firstDigit - secondDigit);
+
+            if (difference != 1) {
+                return false;
+            }
+
+            numberCopy /= 10;
+        }
+
+        return true;
+    }
+
     public void printDetailedProperties() {
         NumberFormat readableNumbers = NumberFormat.getInstance();
         readableNumbers.setGroupingUsed(true);
@@ -99,6 +118,7 @@ public class AmazingNumber {
         System.out.println("         spy: " + isSpy());
         System.out.println("      square: " + isSquare());
         System.out.println("       sunny: " + isSunny());
+        System.out.println("     jumping: " + isJumping());
         System.out.println("        even: " + isEven());
         System.out.println("         odd: " + isOdd());
     }
@@ -132,6 +152,10 @@ public class AmazingNumber {
 
         if (isSquare()) {
             properties.add("square");
+        }
+
+        if (isJumping()) {
+            properties.add("jumping");
         }
 
         if (isEven()) {
