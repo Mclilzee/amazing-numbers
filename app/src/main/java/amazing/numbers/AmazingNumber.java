@@ -24,7 +24,7 @@ public class AmazingNumber {
     }
 
     public boolean isOdd() {
-        return this.number % 2 != 0;
+        return !isEven();
     }
 
     public boolean isBuzz() {
@@ -111,6 +111,10 @@ public class AmazingNumber {
             numberCopy /= 10;
         }
 
+        return true;
+    }
+
+    public boolean isHappy() {
         return true;
     }
 
