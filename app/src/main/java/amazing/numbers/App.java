@@ -8,7 +8,7 @@ import java.util.Scanner;
 
 public class App {
     private static final String[] PROPERTIES = {"BUZZ", "DUCK", "PALINDROMIC", "GAPFUL", "SPY", "SUNNY", "SQUARE",
-            "EVEN", "ODD", "JUMPING"};
+            "EVEN", "ODD", "JUMPING", "HAPPY", "SAD"};
 
     private static final ArrayList<String[]> MUTUALLY_EXCLUSIVE = new ArrayList<>();
 
