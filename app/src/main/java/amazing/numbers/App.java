@@ -191,7 +191,7 @@ public class App {
         }
     }
 
-    // recieves input of property names only
+    // receives input of property names only
     private static boolean arePropertyInputsValid(String[] inputs) {
         boolean containsWrongProperty = false;
         List<String> wrongProperties = new ArrayList<>();
@@ -246,6 +246,9 @@ public class App {
 
     private static boolean propertyExists(String input) {
         for (String property : PROPERTIES) {
+            if (input.charAt(0) == '-') {
+                input = input.substring(1);
+            }
             if (input.equalsIgnoreCase(property)) {
                 return true;
             }
