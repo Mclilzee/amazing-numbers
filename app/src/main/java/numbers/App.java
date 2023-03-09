@@ -1,4 +1,4 @@
-package amazing.numbers;
+package numbers;
 
 import java.security.InvalidParameterException;
 import java.util.ArrayList;

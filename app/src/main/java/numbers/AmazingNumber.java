@@ -1,4 +1,4 @@
-package amazing.numbers;
+package numbers;
 
 import java.text.NumberFormat;
 import java.util.ArrayList;
