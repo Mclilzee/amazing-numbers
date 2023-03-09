@@ -11,6 +11,8 @@ plugins {
     id 'application'
 }
 
+mainClassName = "amazing.numbers.App"
+
 repositories {
     // Use Maven Central for resolving dependencies.
     mavenCentral()
@@ -34,8 +36,6 @@ tasks.named('test') {
     useJUnitPlatform()
 }
 
-jar {
-    manifest {
-        attributes("Main-Class": "amazing.numbers.App")
-    }
+run {
+   standardInput = System.in
 }
