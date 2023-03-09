@@ -24,8 +24,6 @@ public class App {
         for (String property : PROPERTIES) {
             MUTUALLY_EXCLUSIVE.add(new String[]{property, "-" + property});
         }
-
-        System.out.println(MUTUALLY_EXCLUSIVE);
     }
 
     public static void main(String[] args) {
