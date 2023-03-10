@@ -49,7 +49,6 @@ Properties of 234
        happy: false
          sad: true
         even: true
-
 ```
 
 # Example - Looking for Range
@@ -67,7 +66,6 @@ Enter a request: 5 10
                 12 is jumping, sad, even
                 13 is happy, odd
                 14 is buzz, sad, even
-
 ```
 
 # Example - Looking for specific Property
@@ -86,7 +84,6 @@ Enter a request: 1 10 odd
                 15 is sunny, sad, odd
                 17 is buzz, sad, odd
                 19 is happy, odd
-
 ```
 - Looking for 5 numbers that are odd and not jumping starting from 5
 ```console
@@ -97,7 +94,6 @@ Enter a request: 5 5 odd -jumping
                 15 is sunny, sad, odd
                 17 is buzz, sad, odd
                 19 is happy, odd
- 
 ```
 - Looking for conflicting properties
 ```console
